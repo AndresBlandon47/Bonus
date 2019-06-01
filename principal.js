@@ -42,16 +42,15 @@ let creararchivo = (cursos) =>{
     bus = busqueda;//Se crea un objeto que guardara la el objeto encontrado
     if(bus){//Se verifica que el objeto exista
 
-        texto = 'El nombre del aspirante es '+argv.nombre+
-        ' identificado con cedula '+argv.cedula+'\n'+'\n'+
+        texto = '<h1>Bienvenido</h1>'+'El nombre del aspirante es <b>'+argv.nombre+
+        '</b> identificado con cedula <b>'+argv.cedula+'</b>'+
         '<p>Pretende cursar el curso de '+bus.nombre+
         ' el cual se identica con el ID: '+ bus.id+' y tiene un costo de '+bus.valor+
         ' y que tiene una duracion de '+bus.duracion+ ' semanas.';
-        
-        fs.writeFile('reporte.txt',texto,(err) => {
-            if (err) throw ("error");
-            else console.log('Se creo el archivo')
-        });
+        app.get('/', function (req, res) {
+            res.send(texto)
+          })
+
     }else{//En caso de no existir el objeto, se manda error y se listara los cursos exitentes
         console.log('Lo siento compañero pero no existe algun curso con ese id \n'+
         'Se tienen los siguientes cursos disponibles \n');
@@ -64,9 +63,7 @@ let creararchivo = (cursos) =>{
 //Con está condición crea como el menuu
 if(argv._ == 'inscribir'){//Si por consola decidio insbrir, hara la siguientes instrucciones
     creararchivo(cursos);
-    app.get('/', function (req, res) {
-        res.send(texto)
-      })
+    
 }else{//Si no inscribio la palabra "Inscribir, entonces solo enlistara los cursos exitentes"
     
     //-----------------------------------------------------------------//
